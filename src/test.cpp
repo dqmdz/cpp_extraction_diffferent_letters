@@ -1,6 +1,22 @@
 #include "../ext/googletest/googletest/include/gtest/gtest.h"
 #include "../include/extraction.h"
 
+TEST(Contains, TestTrue)
+{
+    const char *str = "abcdefghijklmnopqrstuvwxyz";
+    EXPECT_TRUE(contains((char *)str, str + 26, 'b'));
+    EXPECT_TRUE(contains((char *)str + 5, str + 20, 'q'));
+    EXPECT_TRUE(contains((char *)str + 10, str + 15, 'l'));
+}
+
+TEST(Contains, TestFalse)
+{
+    const char *str = "abcdefghijklmnopqrstuvwxyz";
+    EXPECT_FALSE(contains((char *)str, str + 24, 'z'));
+    EXPECT_FALSE(contains((char *)str + 5, str + 20, 'x'));
+    EXPECT_FALSE(contains((char *)str + 10, str + 15, 'a'));
+}
+
 TEST(Extraction, TestEmptyString)
 {
     EXPECT_EQ(extraction(""), "");
